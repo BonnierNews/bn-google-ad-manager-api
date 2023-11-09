@@ -1,1 +1,1 @@
-export { DFPOptions, GAMClientConfig, DFPClient, GAMClient } from './GAMClient.ts';
+export { DFPOptions, GAMClientConfig, DFPClient, GAMClient } from './GAMClient';
