@@ -1,42 +1,18 @@
 {
-  "name": "google-ad-manager-api",
-  "version": "1.0.3",
+  "name": "soap-dfp-wrapper",
+  "version": "1.0.0",
   "description": "",
+  "main": "index.js",
   "scripts": {
-    "compile": "tsc -p .",
-    "prepare": "npm run compile"
+    "start": "ts-node index.ts",
+    "prepare": "tsc -p ."
   },
-  "author": {
-    "name": "Oz Weiss",
-    "email": "thewizarodofoz@gmail.com"
-  },
-  "license": "Apache-2.0",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "soap": "0.36.0"
-  },
-  "files": [
-    "README.md",
-    "build/src",
-    "package.json"
-  ],
-  "keywords": [
-    "google",
-    "api",
-    "google apis",
-    "client",
-    "client library"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/thewizarodofoz/google-ad-manager-api.git"
-  },
-  "main": "./build/src/index.js",
-  "types": "./build/src/index.d.ts",
-  "devDependencies": {
-    "@types/bluebird": "3.5.23",
-    "@types/node": "10.5.8",
-    "@types/request": "^2.48.5",
-    "@types/sax": "^1.2.1",
-    "typescript": "3.0.1"
+    "google-auth-library": "^9.2.0",
+    "soap": "^1.0.0",
+    "ts-node": "^10.9.1"
   }
 }
