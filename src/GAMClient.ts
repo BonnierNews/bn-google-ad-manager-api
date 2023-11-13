@@ -46,7 +46,7 @@ class GAMClient {
       get: (target, propertyKey) => {
         const method = propertyKey.toString();
 
-        if (target.hasOwnProperty(method)) {
+        if (target.hasOwnProperty(method) && !['setToken'].includes(method)) {
           return async function run(dto: any = {}) {
             let res;
 
