@@ -6,7 +6,8 @@
   "types": "./build/index.d.ts",
   "scripts": {
     "start": "ts-node index.ts",
-    "prepare": "tsc -p ."
+    "compile": "tsc -p .",
+    "prepare": "npm run compile"
   },
   "keywords": [
     "API",
