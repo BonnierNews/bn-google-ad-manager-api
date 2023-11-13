@@ -18,7 +18,7 @@
   },
   "license": "ISC",
   "dependencies": {
-    "soap": "^1.0.0"
+    "soap": "^0.45.0"
   },
   "devDependencies": {
     "google-auth-library": "^9.2.0",
