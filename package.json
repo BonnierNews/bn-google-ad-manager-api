@@ -6,13 +6,19 @@
   "types": "./build/index.d.ts",
   "scripts": {
     "start": "ts-node index.ts",
+    "test": "ts-node ./test/gam-client-feature.ts",
     "compile": "tsc -p .",
-    "prepare": "npm run compile"
+    "prepare": "npm t && npm run compile"
   },
   "keywords": [
     "API",
     "GAM",
     "BonnierNews"
+  ],
+  "files": [
+    "README.md",
+    "build",
+    "package.json"
   ],
   "author": {
     "name": "BonnierNews Annonsutveckling & A$AP"

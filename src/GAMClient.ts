@@ -36,6 +36,7 @@ class GAMClient {
   }
 
   public getService = async (serviceName: string, token?: string) => {
+    if (!this.networkCode) throw "Client not authorized"
     const client = await createClientAsync(`https://ads.google.com/apis/ads/publisher/${this.apiVersion}/${serviceName}?wsdl`)
 
     client.addSoapHeader(this.getSoapHeaders());
