@@ -1,5 +1,5 @@
 {
-  "name": "bn-google-ad-manager-api",
+  "name": "@bonniernews/bn-google-ad-manager-api",
   "version": "1.0.0",
   "description": "",
   "main": "./build/index.js",
