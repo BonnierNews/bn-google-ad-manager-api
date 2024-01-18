@@ -18,7 +18,7 @@ class GAMClient {
   private networkCode: GAMClientConfig["networkCode"] = "";
   private accessToken: GAMClientConfig["accessToken"] = ""
 
-  private getLatestApiVersion = async () => {
+  private async getLatestApiVersion() {
     const response = await fetch("https://ads.google.com/apis/ads/publisher");
 
     const html = await response.text();
@@ -26,7 +26,7 @@ class GAMClient {
     return html.match(/v\d+/g)!.at(-1)!;
   }
 
-  public authorize = async ({ networkCode, apiVersion, accessToken }: GAMClientConfig) => {
+  public async authorize({ networkCode, apiVersion, accessToken }: GAMClientConfig) {
     // TODO: check array of supported versions
     if (apiVersion && !apiVersion.match(/v\d+/)) throw "Api Version not supported"
 
@@ -35,7 +35,7 @@ class GAMClient {
     this.accessToken = accessToken;
   }
 
-  public getService = async (serviceName: string, token?: string) => {
+  public async getService(serviceName: string, token?: string) {
     if (!this.networkCode) throw "Client not authorized"
     const client = await createClientAsync(`https://ads.google.com/apis/ads/publisher/${this.apiVersion}/${serviceName}?wsdl`)
 
