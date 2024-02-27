@@ -57,8 +57,7 @@ class GAMClient {
               res = await promiseFromCallback((cb) => client[method](dto, cb));
             }
 
-            return Array.isArray(res) ? res[0].rval : res.rval;
-
+            return Array.isArray(res) ? !res[0] ? new Error("Got no rval from GAM API, check if values sent are correct") : res[0].rval : res.rval;
           };
         } else {
           return target[method];
