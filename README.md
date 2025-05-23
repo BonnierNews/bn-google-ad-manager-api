@@ -11,7 +11,7 @@ A modern wrapper around Google's [Ad Manager API](https://developers.google.com/
 
 - Promise based - use Promise or async/await
 - Non opinionated about auth mechanisms - obtain a token however you like
-- Typed (TypeScript-isch)
+- Typed (TypeScript-ish)
 
 ## Install
 
