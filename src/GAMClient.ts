@@ -18,7 +18,7 @@ class GAMClient {
   private apiVersion: GAMClientConfig["apiVersion"] = undefined;
   private networkCode: GAMClientConfig["networkCode"] = "";
   private accessToken: GAMClientConfig["accessToken"] = ""
-  private applicationName: GAMClientConfig["applicationName"] = undefined;
+  private applicationName: GAMClientConfig["applicationName"] = "content-api";
 
   private async getLatestApiVersion() {
     const response = await fetch("https://ads.google.com/apis/ads/publisher");
@@ -81,7 +81,7 @@ class GAMClient {
           'xmlns:soapenv': "http://schemas.xmlsoap.org/soap/envelope/"
         },
         'ns1:networkCode': this.networkCode,
-        'ns1:applicationName': this.applicationName || 'content-api'
+        'ns1:applicationName': this.applicationName
       }
     };
   }
