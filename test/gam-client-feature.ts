@@ -55,4 +55,18 @@ describe("gam client", async () => {
     assert(creativeService.setSecurity !== undefined);
     assert(creativeService.addSoapHeader !== undefined);
   });
+
+  it("Client should be able to authorize correctly with an applicationName", async () => {
+    await client.authorize({
+      accessToken: "foo-bar",
+      networkCode: "123456789",
+      applicationName: "my-app"
+    });
+
+    const [, networkCode, accessToken, applicationName] = Object.values(client);
+
+    assert.equal(networkCode, "123456789");
+    assert.equal(accessToken, "foo-bar");
+    assert.equal(applicationName, "my-app");
+  });
 });
