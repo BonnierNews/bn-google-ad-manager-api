@@ -6,6 +6,7 @@ import { enablefakeSoap } from "./helpers/fake-soap";
 
 // Setup the client for testing
 const client = new GAMClient();
+// The reason for unknown cast is to access the internal properties of the client for testing purposes.
 const internals = client as unknown as GAMClientConfig;
 
 describe("gam client", async () => {
