@@ -10,6 +10,8 @@ export type GAMClientConfig = {
 
 export type DFPOptions = GAMClientConfig;
 
+const DEFAULT_APPLICATION_NAME = "content-api";
+
 interface DFPClient extends Client {
   setToken(token: string): void;
 }
@@ -18,7 +20,7 @@ class GAMClient {
   private apiVersion: GAMClientConfig["apiVersion"] = undefined;
   private networkCode: GAMClientConfig["networkCode"] = "";
   private accessToken: GAMClientConfig["accessToken"] = ""
-  private applicationName: GAMClientConfig["applicationName"] = "content-api";
+  private applicationName: GAMClientConfig["applicationName"];
 
   private async getLatestApiVersion() {
     const response = await fetch("https://ads.google.com/apis/ads/publisher");
@@ -28,7 +30,7 @@ class GAMClient {
     return html.match(/v\d+/g)!.at(-1)!;
   }
 
-  public async authorize({ networkCode, apiVersion, accessToken, applicationName }: GAMClientConfig) {
+  public async authorize({ networkCode, apiVersion, accessToken, applicationName = DEFAULT_APPLICATION_NAME }: GAMClientConfig) {
     // TODO: check array of supported versions
     if (apiVersion && !apiVersion.match(/v\d+/)) throw "Api Version not supported"
 

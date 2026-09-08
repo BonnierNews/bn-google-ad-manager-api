@@ -1,11 +1,12 @@
 import assert from "node:assert";
 import { describe, it, before } from "node:test";
-import { GAMClient } from "../src/GAMClient";
+import { GAMClient, GAMClientConfig } from "../src/GAMClient";
 import { enableFakeFetch } from "./helpers/fake-fetch";
 import { enablefakeSoap } from "./helpers/fake-soap";
 
 // Setup the client for testing
 const client = new GAMClient();
+const internals = client as unknown as GAMClientConfig;
 
 describe("gam client", async () => {
   before(() => {
@@ -29,7 +30,7 @@ describe("gam client", async () => {
       apiVersion: "v202309"
     });
 
-    const [apiVersion, networkCode, accessToken] = Object.values(client);
+    const { apiVersion, networkCode, accessToken } = internals;
 
     assert.equal(apiVersion, "v202309");
     assert.equal(networkCode, "123456789");
@@ -42,7 +43,7 @@ describe("gam client", async () => {
       networkCode: "123456789",
     });
 
-    const [apiVersion, networkCode, accessToken] = Object.values(client);
+    const { apiVersion, networkCode, accessToken } = internals;
 
     assert(apiVersion === "v202311");
     assert.equal(networkCode, "123456789");
@@ -63,10 +64,19 @@ describe("gam client", async () => {
       applicationName: "my-app"
     });
 
-    const [, networkCode, accessToken, applicationName] = Object.values(client);
+    const { networkCode, accessToken, applicationName } = internals;
 
     assert.equal(networkCode, "123456789");
     assert.equal(accessToken, "foo-bar");
     assert.equal(applicationName, "my-app");
+  });
+
+  it("Client should fall back to the default applicationName when none is given", async () => {
+    await client.authorize({
+      accessToken: "foo-bar",
+      networkCode: "123456789",
+    });
+
+    assert.equal(internals.applicationName, "content-api");
   });
 });
