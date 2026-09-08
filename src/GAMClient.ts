@@ -5,9 +5,12 @@ export type GAMClientConfig = {
   networkCode: string;
   apiVersion?: string | undefined;
   accessToken: string;
+  applicationName?: string | undefined;
 }
 
 export type DFPOptions = GAMClientConfig;
+
+const DEFAULT_APPLICATION_NAME = "content-api";
 
 interface DFPClient extends Client {
   setToken(token: string): void;
@@ -17,6 +20,7 @@ class GAMClient {
   private apiVersion: GAMClientConfig["apiVersion"] = undefined;
   private networkCode: GAMClientConfig["networkCode"] = "";
   private accessToken: GAMClientConfig["accessToken"] = ""
+  private applicationName: GAMClientConfig["applicationName"];
 
   private async getLatestApiVersion() {
     const response = await fetch("https://ads.google.com/apis/ads/publisher");
@@ -26,13 +30,14 @@ class GAMClient {
     return html.match(/v\d+/g)!.at(-1)!;
   }
 
-  public async authorize({ networkCode, apiVersion, accessToken }: GAMClientConfig) {
+  public async authorize({ networkCode, apiVersion, accessToken, applicationName = DEFAULT_APPLICATION_NAME }: GAMClientConfig) {
     // TODO: check array of supported versions
     if (apiVersion && !apiVersion.match(/v\d+/)) throw "Api Version not supported"
 
     this.networkCode = networkCode;
     this.apiVersion = apiVersion || await this.getLatestApiVersion();
     this.accessToken = accessToken;
+    this.applicationName = applicationName;
   }
 
   public async getService(serviceName: string, token?: string) {
@@ -78,7 +83,7 @@ class GAMClient {
           'xmlns:soapenv': "http://schemas.xmlsoap.org/soap/envelope/"
         },
         'ns1:networkCode': this.networkCode,
-        'ns1:applicationName': 'content-api'
+        'ns1:applicationName': this.applicationName
       }
     };
   }
